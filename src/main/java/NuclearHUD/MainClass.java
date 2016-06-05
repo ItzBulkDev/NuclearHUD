@@ -72,6 +72,12 @@ public class MainClass extends PluginBase {
         }
     }
     
+    public void getHud(Player p){
+        if(this.getConfig().get(p.getName()) == "on"){
+            return true;
+        }
+    }
+    
     public void onDeath(PlayerDeathEvent event){
         if(!this.getConfig().get(event.getEntity().getName() + ".Deaths")){
         this.getConfig().set(event.getEntity().getName() + ".Deaths", 1);
