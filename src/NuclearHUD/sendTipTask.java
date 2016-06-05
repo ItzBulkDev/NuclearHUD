@@ -1,6 +1,7 @@
 package NuclearHUD;
 
 import cn.nukkit.scheduler.PluginTask;
+import cn.nukkit.Player;
 
 public class sendTipTask extends PluginTask<MainClass> {
 
@@ -10,11 +11,10 @@ public class sendTipTask extends PluginTask<MainClass> {
 
     @Override
     public void onRun(int currentTick) {
-        for(this.getServer().getPlayers() : p){
-        if(this.getOwner().getHud(p) === true){
-        String m = this.getOwner().getMessage(p);
-        p.sendTip(m);
+        for(Player p : this.getOwner().getServer().getOnlinePlayers().values()){
+            if(this.getOwner().getHud(p)){
+                p.sendTip(this.getOwner().getMessage(p));
+            }
         }
     }
-}
 }
