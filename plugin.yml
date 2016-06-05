@@ -1,6 +1,6 @@
 name: NuclearHUD
 version: 1.0.0
-main: main.java.NuclearHUD.MainClass
+main: NuclearHUD.MainClass
 author: Bulk
 commands:
   hud:
