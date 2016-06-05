@@ -6,6 +6,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.TextFormat;
 import cn.nukkit.utils.Utils;
+import cn.nukkit.event.player.PlayerDeathEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class MainClass extends PluginBase {
                 //Default values (not necessary)
                 new LinkedHashMap<String, Object>() {
                     {
-                        put("message", "§l§bNuclearHUD ");
+                        put("Message", "§l§bNuclearHUD ");
                         put("ticks", 1);
                     }
                 });
@@ -58,6 +59,43 @@ public class MainClass extends PluginBase {
                 break;
         }
         return true;
+    }
+    public void onDeath(PlayerDeathEvent event){
+        if(!this.getConfig.get(event.getEntity().getName() + ".Deaths")){
+        this.getConfig.set(event.getEntity().getName() + ".Deaths", 1);
+        }else{
+            int deaths = this.getConfig.get(event.getEntity().getName() + ".Deaths");
+            int newDeaths = deaths++;
+            this.getConfig.set(event.getEntity().getName() + "Deaths", newDeaths);
+        }
+        
+        if(!this.getConfig.get(event.getKiller().getName() + ".Kills")){
+        this.getConfig.set(event.getKiller().getName() + ".Kills", 1);
+        }else{
+            int kills = this.getConfig.get(event.getKiller().getName() + ".Kills");
+            int newKills = kills++;
+            this.getConfig.set(event.getKiller().getName() + "Kills", newKills);
+        }
+    }
+    
+    public void getKills(Player p){
+        return this.getConfig.get(p.getName() + "Kills");
+    }
+    
+    public void getDeaths(Player p){
+        return this.getConfig.get(p.getName() + "Deaths");
+    }
+    
+    public void getMessage(Player p){
+        String kills = this.getKills(p);
+        String deaths = this.getDeaths(p);
+        int count = this.getServer().getOnlinePlayers().length;
+        String m = this.getConfig.get("Message");
+        String m2 = m.replaceAll({NAME}, p.getName());
+        String m3 = m2.replaceAll({KILLS}, kills);
+        String m4 = m3.replaceAll({COUNT}, count);
+        String m5 = m4.replaceAll({DEATHS}, deaths);
+        return m5;
     }
 
 }
