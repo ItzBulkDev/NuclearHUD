@@ -55,7 +55,7 @@ public class MainClass extends PluginBase {
                     if(this.getHud(sender) == true){
                         sender.sendMessage(TextFormat.RED + "HUD DISABLED!");
                     }else{
-                        sender.sendMessafe(TextFormat.GREEN + "HUD ENABLED!");
+                        sender.sendMessage(TextFormat.GREEN + "HUD ENABLED!");
                     }
                     this.toggleHud(sender);
                 } catch (IOException e) {
