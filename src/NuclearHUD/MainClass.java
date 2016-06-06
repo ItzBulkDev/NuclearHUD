@@ -111,6 +111,7 @@ public class MainClass extends PluginBase implements Listener{
             .replaceAll("\\{NAME}", p.getName())
             .replaceAll("\\{KILLS}", this.getKills(p))
             .replaceAll("\\{COUNT}", Integer.toString(this.getServer().getOnlinePlayers().size()))
+            .replaceAll("\\{LINE}", "\n")
             .replaceAll("\\{DEATHS}", this.getDeaths(p));
     }
 
